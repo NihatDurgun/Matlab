@@ -1,0 +1,179 @@
+<?xml version="1.0"?>
+<robot name="mr">
+
+<material name="180202015_mrred">
+   <color rgba="1 0 0 0.8" />
+</material>
+<material name="180202015_mryellow">
+   <color rgba="1 1 0 0.8" />
+</material>
+<material name="180202015_mrgreen">
+   <color rgba="0 1 0 0.8" />
+</material>
+<material name="180202015_mrblack">
+   <color rgba="0 0 0 0.8" />
+</material>
+
+
+<link name="180202015_mrbase"/>
+<link name="180202015_mrbase_stand" >
+    <visual>
+      <geometry>
+        <mesh filename="package://stand.stl"/>
+      </geometry>
+      <origin xyz="0 0 0" />
+      <material name="180202015_mrgreen" />
+    </visual>
+    <collision>
+		<origin xyz="0 0 0" />
+		<geometry>
+            <mesh filename="package://stand.stl"/>
+         </geometry>
+	</collision>
+</link>
+<link name="180202015_mrbase_body" >
+    <visual>
+      <geometry>
+        <mesh filename="package://cylinder.stl"/>
+      </geometry>
+      <origin xyz="0 0 0" />
+      <material name="180202015_mrred" />
+    </visual>
+    <collision>
+		<origin xyz="0 0 0" />
+		<geometry>
+            <mesh filename="package://cylinder.stl"/>
+         </geometry>
+	</collision>
+</link>
+
+<link name="180202015_mrcon1" >
+    <visual>
+      <geometry>
+        <cylinder length="21" radius="10" />
+      </geometry>
+       <origin xyz="0 0 10" />
+      <material name="180202015_mryellow" />
+    </visual>
+    <collision>
+		 <origin xyz="0 0 10" />
+		<geometry>
+            <cylinder length="20" radius="10" />
+         </geometry>
+	</collision>
+</link>
+
+<link name="180202015_mrarm_base" >
+    <visual>
+      <geometry>
+        <mesh filename="package://arm_upCube.stl"/>
+      </geometry>
+      <origin xyz="0 0 0" />
+      <material name="180202015_mrred" />
+    </visual>
+    <collision>
+		<origin xyz="0 0 0" />
+		<geometry>
+            <mesh filename="package://arm_upCube.stl"/>
+         </geometry>
+	</collision>
+</link>
+
+<link name="180202015_mrcon2" >
+    <visual>
+      <geometry>
+        <cylinder length="42" radius="10" />
+      </geometry>
+       <origin xyz="0 0 0" />
+      <material name="180202015_mryellow" />
+    </visual>
+    <collision>
+		 <origin xyz="0 0 0" />
+		<geometry>
+            <cylinder length="42" radius="10" />
+         </geometry>
+	</collision>
+</link>
+
+<link name="180202015_mrarm_base2" >
+    <visual>
+      <geometry>
+        <mesh filename="package://arm_upCube2.stl"/>
+      </geometry>
+      <origin xyz="0 0 0" />
+      <material name="180202015_mrred" />
+    </visual>
+    <collision>
+		<origin xyz="0 0 0" />
+		<geometry>
+            <mesh filename="package://arm_upCube2.stl"/>
+         </geometry>
+	</collision>
+</link>
+
+<link name="180202015_mrhand_base" >
+    <visual>
+      <geometry>
+        <mesh filename="package://hand.stl"/>
+      </geometry>
+       <origin xyz="0 0 80" />
+      <material name="180202015_mrblack" />
+    </visual>
+    <collision>
+		 <origin xyz="0 0 80" />
+		<geometry>
+            <mesh filename="package://hand.stl"/>
+         </geometry>
+	</collision>
+</link>
+
+<joint name="180202015_mrbase_Q1" type="fixed">
+    <parent link="180202015_mrbase" />
+    <child link="180202015_mrbase_stand" />
+    <axis xyz="0 0 0" />
+    <origin xyz="0 0 0" />
+</joint>
+
+<joint name="180202015_mrbase_Q2" type="fixed">
+    <parent link="180202015_mrbase_stand" />
+    <child link="180202015_mrbase_body" />
+    <axis xyz="0 0 0" />
+    <origin xyz="0 0 100" />
+</joint>
+
+<joint name="180202015_con1" type="continuous">
+    <parent link="180202015_mrbase_body" />
+    <child link="180202015_mrcon1" />
+    <axis xyz="0 0 1" />
+    <origin xyz="0 0 100" />
+</joint>
+
+<joint name="180202015_mrarm_Q1" type="fixed">
+    <parent link="180202015_mrcon1" />
+    <child link="180202015_mrarm_base" />
+    <axis xyz="0 0 0" />
+    <origin xyz="0 0 0" />
+</joint>
+
+<joint name="180202015_mrcon2" type="continuous">
+    <parent link="180202015_mrarm_base" />
+    <child link="180202015_mrcon2" />
+    <axis xyz="0 0 1" />
+    <origin xyz="0 160 0" />
+</joint>
+
+<joint name="180202015_mrarm_Q2" type="fixed">
+    <parent link="180202015_mrcon2" />
+    <child link="180202015_mrarm_base2" />
+    <axis xyz="0 0 0" />
+    <origin xyz="0 0 -10" />
+</joint>
+
+<joint name="180202015_mrhand_Q1" type="prismatic">
+     <limit effort="10" velocity="1" lower="30" upper="30" />
+    <parent link="180202015_mrarm_base2" />
+    <child link="180202015_mrhand_base" />
+    <axis xyz="0 0 1" />
+    <origin xyz="0 80 0" />
+</joint>
+</robot>
